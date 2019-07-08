@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/ChallenBellamey/RomanNumeralToInteger/issues"
   },
-  "homepage": "https://github.com/ChallenBellamey/RomanNumeralToInteger#readme"
+  "homepage": "https://github.com/ChallenBellamey/RomanNumeralToInteger#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "supertest": "^4.0.2"
+  }
 }
