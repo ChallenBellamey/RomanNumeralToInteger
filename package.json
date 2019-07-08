@@ -1,0 +1,19 @@
+{
+  "name": "romannumeraltointeger",
+  "version": "1.0.1",
+  "description": "A HTTP API that can accept a Roman numeral string and return the value as an integer.",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChallenBellamey/RomanNumeralToInteger.git"
+  },
+  "author": "Challen Bellamey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChallenBellamey/RomanNumeralToInteger/issues"
+  },
+  "homepage": "https://github.com/ChallenBellamey/RomanNumeralToInteger#readme"
+}
