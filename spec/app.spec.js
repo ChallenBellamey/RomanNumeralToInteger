@@ -28,7 +28,7 @@ describe('/api', () => {
 
     it('POST returns (405) method not allowed', () => {
         return request
-            .get('/api')
+            .post('/api')
             .expect(405)
             .then(({ body }) => {
                 expect(body.message).to.equal('Method not allowed.');
@@ -37,7 +37,7 @@ describe('/api', () => {
 
     it('PATCH returns (405) method not allowed', () => {
         return request
-            .get('/api')
+            .patch('/api')
             .expect(405)
             .then(({ body }) => {
                 expect(body.message).to.equal('Method not allowed.');
@@ -46,7 +46,7 @@ describe('/api', () => {
 
     it('DELETE returns (405) method not allowed', () => {
         return request
-            .get('/api')
+            .delete('/api')
             .expect(405)
             .then(({ body }) => {
                 expect(body.message).to.equal('Method not allowed.');
@@ -66,7 +66,7 @@ describe('/api', () => {
 
         it('POST returns (405) method not allowed', () => {
             return request
-                .get('/api/roman-numeral-to-integer')
+                .post('/api/roman-numeral-to-integer')
                 .expect(405)
                 .then(({ body }) => {
                     expect(body.message).to.equal('Method not allowed.');
@@ -75,7 +75,7 @@ describe('/api', () => {
     
         it('PATCH returns (405) method not allowed', () => {
             return request
-                .get('/api/roman-numeral-to-integer')
+                .patch('/api/roman-numeral-to-integer')
                 .expect(405)
                 .then(({ body }) => {
                     expect(body.message).to.equal('Method not allowed.');
@@ -84,7 +84,7 @@ describe('/api', () => {
     
         it('DELETE returns (405) method not allowed', () => {
             return request
-                .get('/api/roman-numeral-to-integer')
+                .delete('/api/roman-numeral-to-integer')
                 .expect(405)
                 .then(({ body }) => {
                     expect(body.message).to.equal('Method not allowed.');
