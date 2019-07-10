@@ -4,15 +4,15 @@ const request = require('supertest')(app);
 
 /*
 User Stories
-- GET /api returns (200) information on how to use X
-- GET /api/roman-numeral-to-integer returns (200) information on how to use X
-- GET /api/roman-numeral-to-integer?rn=*valid Roman numeral* returns (200) correct integer conversion X
-- GET /api/roman-numeral-to-integer?rn=*roman numeral greater than MMMMM* returns (400) value greater than 5000 X
-- GET /api/roman-numeral-to-integer?rn=*invalid Roman numeral* returns (400) invalid Roman numeral X
-- GET /*invalid url* returns (400) invalid url X
-- POST /* returns (400) method not allowed X
-- PATCH /* returns (400) method not allowed X
-- DELETE /* returns (400) method not allowed X
+- GET /api returns (200) information on how to use
+- GET /api/roman-numeral-to-integer returns (200) information on how to use
+- GET /api/roman-numeral-to-integer?rn=*valid Roman numeral* returns (200) correct integer conversion
+- GET /api/roman-numeral-to-integer?rn=*roman numeral greater than MMMMM* returns (400) value greater than 5000
+- GET /api/roman-numeral-to-integer?rn=*invalid Roman numeral* returns (400) invalid Roman numeral
+- GET /*invalid url* returns (400) invalid url
+- POST /* returns (400) method not allowed
+- PATCH /* returns (400) method not allowed
+- DELETE /* returns (400) method not allowed
 */
 
 describe('/api', () => {
