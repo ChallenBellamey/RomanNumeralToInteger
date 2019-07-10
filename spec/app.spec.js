@@ -249,15 +249,6 @@ describe('/api', () => {
                     })
             });
 
-            it('GET returns (400) invalid Roman numerals (given invalid arrangement, IIII)', () => {
-                return request
-                    .get('/api/roman-numerals-to-integer?rn=IIII')
-                    .expect(400)
-                    .then(({ body }) => {
-                        expect(body.message).to.equal('Invalid Roman numerals.')
-                    })
-            });
-
             it('GET returns (400) invalid Roman numerals (given invalid arrangement, IIMM)', () => {
                 return request
                     .get('/api/roman-numerals-to-integer?rn=IIMM')

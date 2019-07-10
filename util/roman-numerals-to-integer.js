@@ -20,7 +20,13 @@ const romanNumeralsToInteger = (RN) => {
 
     const RNArray = RN.split('');
 
-    const RNIsValid = RNArray.every(rn => Object.keys(romanNumeralValues).includes(rn));
+    const RNIsValid = RNArray.every((rn, i) => {
+        const validSymbols = Object.keys(romanNumeralValues).includes(rn);
+        const validArrangement = (romanNumeralValues[rn] <= romanNumeralValues[RNArray[i + 1]])
+            ? RNArray.slice(i + 2).every(subrn => romanNumeralValues[subrn] <= romanNumeralValues[rn])
+            : true;
+        return (validSymbols && validArrangement);
+    });
 
     let result = 0;
     
