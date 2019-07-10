@@ -8,8 +8,8 @@ User Stories
 - GET /api/roman-numeral-to-integer returns (200) information on how to use X
 - GET /api/roman-numeral-to-integer?rn=*valid Roman numeral* returns (200) correct integer conversion X
 - GET /api/roman-numeral-to-integer?rn=*roman numeral greater than MMMMM* returns (400) value greater than 5000 X
-- GET /api/roman-numeral-to-integer?rn=*invalid Roman numeral* returns (400) invalid Roman numeral
-- GET /*invalid url* returns (400) invalid url
+- GET /api/roman-numeral-to-integer?rn=*invalid Roman numeral* returns (400) invalid Roman numeral X
+- GET /*invalid url* returns (400) invalid url X
 - POST /* returns (400) method not allowed X
 - PATCH /* returns (400) method not allowed X
 - DELETE /* returns (400) method not allowed X
@@ -249,5 +249,27 @@ describe('/api', () => {
                     })
             });
         });
+    });
+
+    describe ('/*invalid url*', () => {
+        it('GET returns (400) invalid url', () => {
+            return request
+                .get('/api/invalid-url')
+                .expect(400)
+                .then(({ body }) => {
+                    expect(body.message).to.equal('Invalid url.')
+                })
+        });
+    });
+});
+
+describe ('/*invalid url*', () => {
+    it('GET returns (400) invalid url', () => {
+        return request
+            .get('/invalid-url')
+            .expect(400)
+            .then(({ body }) => {
+                expect(body.message).to.equal('Invalid url.')
+            })
     });
 });
