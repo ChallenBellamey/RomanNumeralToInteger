@@ -1,6 +1,6 @@
 
 const romanNumeralsToInteger = (RN) => {
-    const romanNumerals = {
+    const romanNumeralValues = {
         I: 1,
         V: 5,
         X: 10,
@@ -10,13 +10,25 @@ const romanNumeralsToInteger = (RN) => {
         M: 1000
     };
 
+    const nextNumeralValue = (shift = true) => {
+        if (shift) {
+            return romanNumeralValues[RNArray.shift()];
+        } else {
+            return romanNumeralValues[RNArray[0]];
+        };
+    };
+
     const RNArray = RN.split('');
+
+    const RNIsValid = RNArray.every(rn => Object.keys(romanNumeralValues).includes(rn));
+
     let result = 0;
-    if (RNArray.every(rn => Object.keys(romanNumerals).includes(rn))) {
+    
+    if (RNIsValid) {
         while (RNArray.length > 0 && result <= 5000) {
-            let n = romanNumerals[RNArray.shift()];
-            if (romanNumerals[RNArray[0]] > n) {
-                n = romanNumerals[RNArray.shift()] - n;
+            let n = nextNumeralValue();
+            if (nextNumeralValue(false) > n) {
+                n = nextNumeralValue() - n;
             };
             result += n;
         };
