@@ -6,9 +6,9 @@ const request = require('supertest')(app);
 User Stories
 - GET /api returns (200) information on how to use X
 - GET /api/roman-numeral-to-integer returns (200) information on how to use X
-- GET /api/roman-numeral-to-integer?rn=*valid roman numeral* returns (200) correct integer conversion X
-- GET /api/roman-numeral-to-integer?rn=*roman numeral greater than MMMMM* returns (400) value greater than 5000
-- GET /api/roman-numeral-to-integer?rn=*invalid roman numeral* returns (400) invalid roman numeral
+- GET /api/roman-numeral-to-integer?rn=*valid Roman numeral* returns (200) correct integer conversion X
+- GET /api/roman-numeral-to-integer?rn=*roman numeral greater than MMMMM* returns (400) value greater than 5000 X
+- GET /api/roman-numeral-to-integer?rn=*invalid Roman numeral* returns (400) invalid Roman numeral
 - GET /*invalid url* returns (400) invalid url
 - POST /* returns (400) method not allowed X
 - PATCH /* returns (400) method not allowed X
@@ -22,7 +22,7 @@ describe('/api', () => {
             .get('/api')
             .expect(200)
             .then(({ body }) => {
-                expect(body.message).to.equal('Hello! Please attach a query to your get request to receive a roman numeral conversion, i.e. /api/roman-numeral-to-integer?rn=CC');
+                expect(body.message).to.equal('Hello! Please attach a query to your get request to receive a Roman numeral conversion, i.e. /api/roman-numeral-to-integer?rn=CC');
             })
     });
 
@@ -60,7 +60,7 @@ describe('/api', () => {
                 .get('/api/roman-numeral-to-integer')
                 .expect(200)
                 .then(({ body }) => {
-                    expect(body.message).to.equal('Hello! Please attach a query to your get request to receive a roman numeral conversion, i.e. /api/roman-numeral-to-integer?rn=CC');
+                    expect(body.message).to.equal('Hello! Please attach a query to your get request to receive a Roman numeral conversion, i.e. /api/roman-numeral-to-integer?rn=CC');
                 })
         });
 
@@ -91,7 +91,7 @@ describe('/api', () => {
                 })
         });
 
-        describe('?rn=*valid roman numeral', () => {
+        describe('?rn=*valid Roman numeral', () => {
             it('GET returns (200) correct integer conversion (given I)', () => {
                 return request 
                     .get('/api/roman-numerals-to-integer?rn=I')
@@ -235,6 +235,17 @@ describe('/api', () => {
                     .expect(400)
                     .then(({ body }) => {
                         expect(body.message).to.equal('Requested value is greater than 5000.')
+                    })
+            });
+        });
+
+        describe('?rn=*invalid Roman numeral*', () => {
+            it('GET returns (400) invalid Roman numeral', () => {
+                return request
+                    .get('/api/roman-numerals-to-integer?rn=ABC')
+                    .expect(400)
+                    .then(({ body }) => {
+                        expect(body.message).to.equal('Invalid Roman numeral.')
                     })
             });
         });
