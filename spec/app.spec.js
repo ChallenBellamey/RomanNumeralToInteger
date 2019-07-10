@@ -227,5 +227,16 @@ describe('/api', () => {
                     })
             });
         });
+
+        describe('?rn=*roman numeral greater than MMMMM*', () => {
+            it('GET returns (400) value greater than 5000', () => {
+                return request 
+                    .get('/api/roman-numerals-to-integer?rn=MMMMMI')
+                    .expect(400)
+                    .then(({ body }) => {
+                        expect(body.message).to.equal('Requested value is greater than 5000.')
+                    })
+            });
+        });
     });
 });
