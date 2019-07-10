@@ -5,10 +5,10 @@ const request = require('supertest')(app);
 /*
 User Stories
 - GET /api returns (200) information on how to use
-- GET /api/roman-numeral-to-integer returns (200) information on how to use
-- GET /api/roman-numeral-to-integer?rn=*valid Roman numeral* returns (200) correct integer conversion
-- GET /api/roman-numeral-to-integer?rn=*roman numeral greater than MMMMM* returns (400) value greater than 5000
-- GET /api/roman-numeral-to-integer?rn=*invalid Roman numeral* returns (400) invalid Roman numeral
+- GET /api/roman-numerals-to-integer returns (200) information on how to use
+- GET /api/roman-numerals-to-integer?rn=*valid Roman numerals* returns (200) correct integer conversion
+- GET /api/roman-numerals-to-integer?rn=*roman numeralss greater than MMMMM* returns (400) value greater than 5000
+- GET /api/roman-numerals-to-integer?rn=*invalid Roman numerals* returns (400) invalid Roman numerals
 - GET /*invalid url* returns (400) invalid url
 - POST /* returns (400) method not allowed
 - PATCH /* returns (400) method not allowed
@@ -22,7 +22,7 @@ describe('/api', () => {
             .get('/api')
             .expect(200)
             .then(({ body }) => {
-                expect(body.message.slice(0, 86)).to.equal('Hello! Please attach a query to your get request to receive a Roman numeral conversion');
+                expect(body.message.slice(0, 87)).to.equal('Hello! Please attach a query to your get request to receive a Roman numerals conversion');
             })
     });
 
@@ -53,20 +53,20 @@ describe('/api', () => {
             })
     });
 
-    describe('/roman-numeral-to-integer', () => {
+    describe('/roman-numerals-to-integer', () => {
 
         it('GET returns (200) information on how to use', () => {
             return request
-                .get('/api/roman-numeral-to-integer')
+                .get('/api/roman-numerals-to-integer')
                 .expect(200)
                 .then(({ body }) => {
-                    expect(body.message.slice(0, 86)).to.equal('Hello! Please attach a query to your get request to receive a Roman numeral conversion');
+                    expect(body.message.slice(0, 87)).to.equal('Hello! Please attach a query to your get request to receive a Roman numerals conversion');
                 })
         });
 
         it('POST returns (405) method not allowed', () => {
             return request
-                .post('/api/roman-numeral-to-integer')
+                .post('/api/roman-numerals-to-integer')
                 .expect(405)
                 .then(({ body }) => {
                     expect(body.message).to.equal('Method not allowed.');
@@ -75,7 +75,7 @@ describe('/api', () => {
     
         it('PATCH returns (405) method not allowed', () => {
             return request
-                .patch('/api/roman-numeral-to-integer')
+                .patch('/api/roman-numerals-to-integer')
                 .expect(405)
                 .then(({ body }) => {
                     expect(body.message).to.equal('Method not allowed.');
@@ -84,14 +84,14 @@ describe('/api', () => {
     
         it('DELETE returns (405) method not allowed', () => {
             return request
-                .delete('/api/roman-numeral-to-integer')
+                .delete('/api/roman-numerals-to-integer')
                 .expect(405)
                 .then(({ body }) => {
                     expect(body.message).to.equal('Method not allowed.');
                 })
         });
 
-        describe('?rn=*valid Roman numeral', () => {
+        describe('?rn=*valid Roman numerals', () => {
             it('GET returns (200) correct integer conversion (given I)', () => {
                 return request 
                     .get('/api/roman-numerals-to-integer?rn=I')
@@ -169,7 +169,7 @@ describe('/api', () => {
                     .get('/api/roman-numerals-to-integer?rn=III')
                     .expect(200)
                     .then(({ body }) => {
-                        expect(body).to.eql({numerals: '3', result: 3})
+                        expect(body).to.eql({numerals: 'III', result: 3})
                     })
             });
 
@@ -228,7 +228,7 @@ describe('/api', () => {
             });
         });
 
-        describe('?rn=*roman numeral greater than MMMMM*', () => {
+        describe('?rn=*roman numerals greater than MMMMM*', () => {
             it('GET returns (400) value greater than 5000', () => {
                 return request 
                     .get('/api/roman-numerals-to-integer?rn=MMMMMI')
@@ -240,12 +240,12 @@ describe('/api', () => {
         });
 
         describe('?rn=*invalid Roman numeral*', () => {
-            it('GET returns (400) invalid Roman numeral', () => {
+            it('GET returns (400) invalid Roman numerals', () => {
                 return request
                     .get('/api/roman-numerals-to-integer?rn=ABC')
                     .expect(400)
                     .then(({ body }) => {
-                        expect(body.message).to.equal('Invalid Roman numeral.')
+                        expect(body.message).to.equal('Invalid Roman numerals.')
                     })
             });
         });

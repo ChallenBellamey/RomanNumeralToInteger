@@ -1,8 +1,15 @@
 const rntiRouter = require('express').Router();
 const { apiInfo } = require('../controllers/api-controller.js');
+const { getRNTI } = require('../controllers/rnti-controller.js');
 
 rntiRouter.route('/')
-    .get(apiInfo)
+    .get((req, res, next) => {
+        if (req.query.rn) {
+            getRNTI(req, res, next);
+        } else {
+            apiInfo(req, res, next);
+        };
+    })
     .all((req, res, next) => {
         next({code: 405, message: 'Method not allowed.'});
     });

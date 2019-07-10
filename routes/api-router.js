@@ -8,7 +8,7 @@ apiRouter.route('/')
         next({code: 405, message: 'Method not allowed.'});
     });
 
-apiRouter.use('/roman-numeral-to-integer', rntiRouter);
+apiRouter.use('/roman-numerals-to-integer', rntiRouter);
 
 apiRouter.route('/*')
     .all((req, res, next) => {
