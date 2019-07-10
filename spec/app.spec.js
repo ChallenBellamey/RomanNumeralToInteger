@@ -1,4 +1,4 @@
-const app = require('../app.js');
+const { app } = require('../app.js');
 const { expect } = require('chai');
 const request = require('supertest')(app);
 
@@ -22,7 +22,7 @@ describe('/api', () => {
             .get('/api')
             .expect(200)
             .then(({ body }) => {
-                expect(body.message).to.equal('Hello! Please attach a query to your get request to receive a Roman numeral conversion, i.e. /api/roman-numeral-to-integer?rn=CC');
+                expect(body.message.slice(0, 86)).to.equal('Hello! Please attach a query to your get request to receive a Roman numeral conversion');
             })
     });
 
@@ -60,7 +60,7 @@ describe('/api', () => {
                 .get('/api/roman-numeral-to-integer')
                 .expect(200)
                 .then(({ body }) => {
-                    expect(body.message).to.equal('Hello! Please attach a query to your get request to receive a Roman numeral conversion, i.e. /api/roman-numeral-to-integer?rn=CC');
+                    expect(body.message.slice(0, 86)).to.equal('Hello! Please attach a query to your get request to receive a Roman numeral conversion');
                 })
         });
 

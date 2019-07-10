@@ -1,5 +1,6 @@
 const apiRouter = require('express').Router();
+const { apiInfo } = require('../controllers/api-controller.js');
 
-apiRouter.use('/', () => {});
+apiRouter.use('/', apiInfo);
 
 module.exports = { apiRouter };
