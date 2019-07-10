@@ -7,7 +7,7 @@ User Stories
 - GET /api returns (200) information on how to use
 - GET /api/roman-numerals-to-integer returns (200) information on how to use
 - GET /api/roman-numerals-to-integer?rn=*valid Roman numerals* returns (200) correct integer conversion
-- GET /api/roman-numerals-to-integer?rn=*roman numeralss greater than MMMMM* returns (400) value greater than 5000
+- GET /api/roman-numerals-to-integer?rn=*roman numerals greater than MMMMM* returns (400) value greater than 5000
 - GET /api/roman-numerals-to-integer?rn=*invalid Roman numerals* returns (400) invalid Roman numerals
 - GET /*invalid url* returns (400) invalid url
 - POST /* returns (400) method not allowed
@@ -240,9 +240,27 @@ describe('/api', () => {
         });
 
         describe('?rn=*invalid Roman numeral*', () => {
-            it('GET returns (400) invalid Roman numerals', () => {
+            it('GET returns (400) invalid Roman numerals (given invalid symbols, ABC)', () => {
                 return request
                     .get('/api/roman-numerals-to-integer?rn=ABC')
+                    .expect(400)
+                    .then(({ body }) => {
+                        expect(body.message).to.equal('Invalid Roman numerals.')
+                    })
+            });
+
+            it('GET returns (400) invalid Roman numerals (given invalid arrangement, IIII)', () => {
+                return request
+                    .get('/api/roman-numerals-to-integer?rn=IIII')
+                    .expect(400)
+                    .then(({ body }) => {
+                        expect(body.message).to.equal('Invalid Roman numerals.')
+                    })
+            });
+
+            it('GET returns (400) invalid Roman numerals (given invalid arrangement, IIMM)', () => {
+                return request
+                    .get('/api/roman-numerals-to-integer?rn=IIMM')
                     .expect(400)
                     .then(({ body }) => {
                         expect(body.message).to.equal('Invalid Roman numerals.')
