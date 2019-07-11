@@ -1,5 +1,5 @@
 const rntiRouter = require('express').Router();
-const { apiInfo } = require('../controllers/api-controller.js');
+const { getInfo } = require('../controllers/api-controller.js');
 const { getRNTI } = require('../controllers/rnti-controller.js');
 
 rntiRouter.route('/')
@@ -7,7 +7,7 @@ rntiRouter.route('/')
         if (req.query.rn) {
             getRNTI(req, res, next);
         } else {
-            apiInfo(req, res, next);
+            getInfo(req, res, next);
         };
     })
     .all((req, res, next) => {

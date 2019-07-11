@@ -18,13 +18,18 @@ const romanNumeralsToInteger = (RN) => {
         };
     };
 
-    const RNArray = RN.split('');
+    const RNArray = RN.toUpperCase().split('');
 
     const RNIsValid = RNArray.every((rn, i) => {
+        // Check that all the characters in the string are valid Roman numeral characters
         const validSymbols = Object.keys(romanNumeralValues).includes(rn);
+
+        // Check that in general the characters with greatest value are first in the string
         const validArrangement = (romanNumeralValues[rn] <= romanNumeralValues[RNArray[i + 1]])
             ? RNArray.slice(i + 2).every(subrn => romanNumeralValues[subrn] <= romanNumeralValues[rn])
             : true;
+
+        // If both are true then the Roman numeral is valid
         return (validSymbols && validArrangement);
     });
 

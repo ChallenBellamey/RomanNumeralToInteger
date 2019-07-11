@@ -1,9 +1,9 @@
 const apiRouter = require('express').Router();
-const { apiInfo } = require('../controllers/api-controller.js');
+const { getInfo } = require('../controllers/api-controller.js');
 const { rntiRouter } = require('../routes/rnti-router.js');
 
 apiRouter.route('/')
-    .get(apiInfo)
+    .get(getInfo)
     .all((req, res, next) => {
         next({code: 405, message: 'Method not allowed.'});
     });

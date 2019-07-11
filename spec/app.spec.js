@@ -31,7 +31,7 @@ describe('/api', () => {
             .post('/api')
             .expect(405)
             .then(({ body }) => {
-                expect(body.message).to.equal('Method not allowed.');
+                expect(body.err.message).to.equal('Method not allowed.');
             })
     });
 
@@ -40,7 +40,7 @@ describe('/api', () => {
             .patch('/api')
             .expect(405)
             .then(({ body }) => {
-                expect(body.message).to.equal('Method not allowed.');
+                expect(body.err.message).to.equal('Method not allowed.');
             })
     });
 
@@ -49,7 +49,7 @@ describe('/api', () => {
             .delete('/api')
             .expect(405)
             .then(({ body }) => {
-                expect(body.message).to.equal('Method not allowed.');
+                expect(body.err.message).to.equal('Method not allowed.');
             })
     });
 
@@ -69,7 +69,7 @@ describe('/api', () => {
                 .post('/api/roman-numerals-to-integer')
                 .expect(405)
                 .then(({ body }) => {
-                    expect(body.message).to.equal('Method not allowed.');
+                    expect(body.err.message).to.equal('Method not allowed.');
                 })
         });
     
@@ -78,7 +78,7 @@ describe('/api', () => {
                 .patch('/api/roman-numerals-to-integer')
                 .expect(405)
                 .then(({ body }) => {
-                    expect(body.message).to.equal('Method not allowed.');
+                    expect(body.err.message).to.equal('Method not allowed.');
                 })
         });
     
@@ -87,7 +87,7 @@ describe('/api', () => {
                 .delete('/api/roman-numerals-to-integer')
                 .expect(405)
                 .then(({ body }) => {
-                    expect(body.message).to.equal('Method not allowed.');
+                    expect(body.err.message).to.equal('Method not allowed.');
                 })
         });
 
@@ -226,6 +226,15 @@ describe('/api', () => {
                         expect(body).to.eql({numerals: 'CCLXXVIII', result: 278})
                     })
             });
+
+            it('GET returns (200) correct integer conversion (given iii)', () => {
+                return request 
+                    .get('/api/roman-numerals-to-integer?rn=iii')
+                    .expect(200)
+                    .then(({ body }) => {
+                        expect(body).to.eql({numerals: 'III', result: 3})
+                    })
+            });
         });
 
         describe('?rn=*roman numerals greater than MMMMM*', () => {
@@ -234,7 +243,7 @@ describe('/api', () => {
                     .get('/api/roman-numerals-to-integer?rn=MMMMMI')
                     .expect(400)
                     .then(({ body }) => {
-                        expect(body.message).to.equal('Requested value is greater than 5000.')
+                        expect(body.err.message).to.equal('Requested value is greater than 5000.')
                     })
             });
         });
@@ -245,7 +254,7 @@ describe('/api', () => {
                     .get('/api/roman-numerals-to-integer?rn=ABC')
                     .expect(400)
                     .then(({ body }) => {
-                        expect(body.message).to.equal('Invalid Roman numerals.')
+                        expect(body.err.message).to.equal('Invalid Roman numerals.')
                     })
             });
 
@@ -254,7 +263,7 @@ describe('/api', () => {
                     .get('/api/roman-numerals-to-integer?rn=IIMM')
                     .expect(400)
                     .then(({ body }) => {
-                        expect(body.message).to.equal('Invalid Roman numerals.')
+                        expect(body.err.message).to.equal('Invalid Roman numerals.')
                     })
             });
         });
@@ -266,7 +275,7 @@ describe('/api', () => {
                 .get('/api/invalid-url')
                 .expect(400)
                 .then(({ body }) => {
-                    expect(body.message).to.equal('Invalid url.')
+                    expect(body.err.message).to.equal('Invalid url.')
                 })
         });
     });
@@ -278,7 +287,7 @@ describe ('/*invalid url*', () => {
             .get('/invalid-url')
             .expect(400)
             .then(({ body }) => {
-                expect(body.message).to.equal('Invalid url.')
+                expect(body.err.message).to.equal('Invalid url.')
             })
     });
 });
